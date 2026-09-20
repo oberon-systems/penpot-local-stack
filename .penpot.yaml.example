@@ -1,0 +1,9 @@
+# Penpot local stack. Copy to .penpot.yaml and edit; install.sh does that for
+# you. Remove a key to fall back to its default, or override it in the
+# environment as PENPOT_PORT, PENPOT_TEMPLATES and so on.
+
+templates: templates
+host: 127.0.0.1
+port: 9001
+project: penpot-local
+version: 2.17.2

@@ -1,0 +1,79 @@
+[project]
+name = "penpot-local-stack"
+version = "0.1.0"
+description = "A disposable local Penpot stack: import a template, draw, export it back"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "zombig", email = "me@zombig.name" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.27",
+    "pydantic-settings>=2.4",
+    "pydantic>=2",
+    "PyYAML>=6",
+    "questionary>=2",
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: POSIX",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Utilities",
+]
+
+[project.scripts]
+penpot-stack = "penpot_stack.cli:main"
+
+[project.urls]
+Repository = "https://github.com/oberon-systems/penpot-local-stack"
+Issues = "https://github.com/oberon-systems/penpot-local-stack/issues"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+# The checkout keeps the modules in libs/ and the stack files in config/; the
+# wheel carries both under one importable package name.
+[tool.hatch.build.targets.wheel]
+only-include = ["libs", "config"]
+sources = { "libs" = "penpot_stack", "config" = "penpot_stack/config" }
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "libs",
+    "config",
+    "bin",
+    "install",
+    "tests",
+    "Makefile",
+    ".penpot.yaml.example",
+    "README.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["libs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"

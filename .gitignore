@@ -1,0 +1,23 @@
+# Agents Configs
+.claude/
+.gemini/
+CLAUDE.local.md
+GEMINI.md
+.mcp.json
+
+# IDE
+.venv
+.idea
+
+# Python build and test artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.pytest_cache/
+
+# pre-commit cache, kept in-tree by PRE_COMMIT_HOME
+.pre-commit
+
+# Local stack settings, written by install.sh
+.penpot.yaml
