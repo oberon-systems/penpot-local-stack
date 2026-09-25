@@ -75,6 +75,23 @@ def drafts(client: httpx.Client) -> str:
     return str(next(p["id"] for p in projects if p["isDefault"] and p["isDefaultTeam"]))
 
 
+def state(client: httpx.Client, file_id: str) -> dict[str, Any]:
+    data = rpc(client, "get-file", id=file_id)["data"]
+    pages = data["pagesIndex"]
+    return {
+        "pages": {
+            page: {
+                "name": pages[page]["name"],
+                "shapes": {k: v["name"] for k, v in pages[page]["objects"].items()},
+            }
+            for page in data["pages"]
+        },
+        "components": {
+            k: v["name"] for k, v in data.get("components", {}).items() if not v.get("deleted")
+        },
+    }
+
+
 def files(client: httpx.Client) -> list[tuple[str, str]]:
     return [
         (f"{project['name']} / {file['name']}", file["id"])

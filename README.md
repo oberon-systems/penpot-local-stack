@@ -136,6 +136,12 @@ creating something or overwriting it.
   again.
 - Frame thumbnails are raster renders Penpot rebuilds on its own, so the
   export leaves them out.
+- Penpot keeps deleted work in the archive until its own cleanup runs, so
+  `export` saves the live state of the file next to `manifest.json` as
+  `state.json` and keeps only the pages, shapes and components listed there,
+  plus the images they still use. `import` leaves `state.json` out.
+- `extract` has no live Penpot to ask, so it drops only shapes no page reaches,
+  deleted components nothing copies and images nothing points at.
 - Import keeps the Penpot file id, so a round trip changes only what you drew.
 
 ## Connect Penpot MCP
