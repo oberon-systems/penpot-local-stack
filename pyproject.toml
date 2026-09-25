@@ -1,6 +1,6 @@
 [project]
 name = "penpot-local-stack"
-version = "0.1.0"
+version = "0.1.1"
 description = "A disposable local Penpot stack: import a template, draw, export it back"
 readme = "README.md"
 license = "MIT"
