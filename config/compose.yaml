@@ -76,7 +76,7 @@ services:
       POSTGRES_PASSWORD: penpot
 
   penpot-valkey:
-    image: valkey/valkey:8.1
+    image: valkey/valkey:9.1
     command: [valkey-server, --save, "", --appendonly, "no"]
     healthcheck:
       test: [CMD-SHELL, valkey-cli ping | grep PONG]
