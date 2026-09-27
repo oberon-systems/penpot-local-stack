@@ -60,7 +60,7 @@ services:
       PENPOT_REDIS_URI: redis://penpot-valkey/0
 
   penpot-postgres:
-    image: postgres:15
+    image: postgres:18
     stop_signal: SIGINT
     tmpfs:
       - /var/lib/postgresql/data
