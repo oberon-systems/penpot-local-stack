@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     host: str = "127.0.0.1"
     port: int = 9001
     project: str = "penpot-local"
-    version: str = "2.17.2"
+    version: str | None = None
     email: str = "designer@example.com"
     password: str = "penpot-local"  # noqa: S105
 

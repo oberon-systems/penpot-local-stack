@@ -56,7 +56,7 @@ templates: templates
 host: 127.0.0.1
 port: 9001
 project: penpot-local
-version: 2.17.2
+# version: 2.17.2
 ```
 
 | Key         | Default                | What it sets                    |
@@ -65,9 +65,12 @@ version: 2.17.2
 | `host`      | `127.0.0.1`            | The address Penpot binds to     |
 | `port`      | `9001`                 | The port Penpot binds to        |
 | `project`   | `penpot-local`         | The Compose project name        |
-| `version`   | `2.17.2`               | The Penpot image tag            |
+| `version`   | unset                  | The Penpot image tag            |
 | `email`     | `designer@example.com` | The throwaway profile           |
 | `password`  | `penpot-local`         | Its password                    |
+
+Left unset, `version` runs the tags pinned in `config/compose.yaml`, which
+Dependabot keeps current; set it only to hold or try a specific release.
 
 Drop a key to fall back to its default. Every key also answers to an
 environment variable with a `PENPOT_` prefix, and the variable wins over the

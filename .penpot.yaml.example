@@ -6,4 +6,4 @@ templates: templates
 host: 127.0.0.1
 port: 9001
 project: penpot-local
-version: 2.17.2
+# version: 2.17.2  # unset runs the tags shipped in config/compose.yaml

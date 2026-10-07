@@ -1,11 +1,15 @@
 """The shipped Compose definition and the nginx route that publishes MCP."""
 
+import json
 import os
 import secrets
 import subprocess
+import tempfile
 from pathlib import Path
 
 from .settings import Settings, settings
+
+IMAGES = ("frontend", "backend", "mcp", "exporter")
 
 
 def directory() -> Path:
@@ -20,16 +24,27 @@ def environment(config: Settings) -> dict[str, str]:
         "PENPOT_PROJECT": config.project,
         "PENPOT_HOST": config.host,
         "PENPOT_PORT": str(config.port),
-        "PENPOT_VERSION": config.version,
         "PENPOT_URI": config.url,
         "PENPOT_SECRET_KEY": secrets.token_urlsafe(48),
     }
 
 
+def pinned(version: str) -> str:
+    # The shipped tags stay literal so Dependabot can bump them; a chosen version layers on top.
+    services = {f"penpot-{name}": {"image": f"penpotapp/{name}:{version}"} for name in IMAGES}
+    return json.dumps({"services": services})
+
+
 def compose(*args: str) -> None:
-    env = {**environment(settings()), **os.environ}
-    command = ["docker", "compose", "-f", str(directory() / "compose.yaml"), *args]
-    subprocess.run(command, check=True, env=env)  # noqa: S603, S607
+    config = settings()
+    env = {**environment(config), **os.environ}
+    with tempfile.TemporaryDirectory() as scratch:
+        files = [directory() / "compose.yaml"]
+        if config.version:
+            files.append(Path(scratch) / "version.yaml")
+            files[-1].write_text(pinned(config.version))
+        flags = [flag for path in files for flag in ("-f", str(path))]
+        subprocess.run(["docker", "compose", *flags, *args], check=True, env=env)  # noqa: S603, S607
 
 
 def publish(key: str) -> None:
