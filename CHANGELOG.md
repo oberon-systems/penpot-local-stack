@@ -1,3 +1,14 @@
+## 0.1.2 (2026-10-07)
+
+### Bug Fixes
+
+- **compose**: Penpot images carry literal tags Dependabot can bump
+
+### Build
+
+- **deps**: Bump https://github.com/astral-sh/ruff-pre-commit
+- **deps**: Bump postgres from 15 to 18 in /config
+
 ## 0.1.1 (2026-09-25)
 
 ### Bug Fixes
