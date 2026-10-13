@@ -1,3 +1,9 @@
+## 0.1.4 (2026-10-13)
+
+### Bug Fixes
+
+- **settings**: Each local stack opens on its own localhost name
+
 ## 0.1.3 (2026-10-13)
 
 ### Bug Fixes
