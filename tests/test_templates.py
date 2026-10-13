@@ -2,6 +2,7 @@ import io
 import json
 import zipfile
 
+import httpx
 import pytest
 
 from libs import templates
@@ -190,3 +191,20 @@ def test_unpack_writes_the_state_and_pack_leaves_it_out(tmp_path, archive):
     assert json.loads((target / "state.json").read_text()) == current
     packed = zipfile.ZipFile(io.BytesIO(templates.pack(target)))
     assert packed.namelist() == ["manifest.json"]
+
+
+def test_download_fetches_the_link_from_the_cli_endpoint(monkeypatch):
+    buffer = io.BytesIO()
+    zipfile.ZipFile(buffer, "w").close()
+    link = '"~rhttp://alpha.localhost:9001/assets/by-id/x?y=1"'
+    monkeypatch.setattr(templates, "stream", lambda *_, **__: link)
+    seen = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(str(request.url))
+        return httpx.Response(200, content=buffer.getvalue())
+
+    client = httpx.Client(base_url="http://localhost:9001", transport=httpx.MockTransport(handler))
+    templates.download(client, "f")
+
+    assert seen == ["http://localhost:9001/assets/by-id/x?y=1"]

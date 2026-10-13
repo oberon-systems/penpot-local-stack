@@ -62,7 +62,8 @@ def download(client: httpx.Client, file_id: str) -> zipfile.ZipFile:
     url = re.search(r'"~r([^"]+)"|"~#uri"\s*:\s*"([^"]+)"', result)
     if url is None:
         sys.exit(f"export-binfile: no download link in {result}")
-    response = client.get(url.group(1) or url.group(2))
+    # The link carries the browser's *.localhost name, which the resolver here may not know.
+    response = client.get(httpx.URL(url.group(1) or url.group(2)).raw_path.decode())
     response.raise_for_status()
     return zipfile.ZipFile(io.BytesIO(response.content))
 
