@@ -38,7 +38,7 @@ def stream(client: httpx.Client, command: str, **kwargs: Any) -> str:
 
 def connect(wait: float) -> httpx.Client | None:
     client = httpx.Client(
-        base_url=settings().url,
+        base_url=settings().endpoint,
         headers={"Accept": "application/json"},
         timeout=60,
         follow_redirects=True,
@@ -58,7 +58,7 @@ def connect(wait: float) -> httpx.Client | None:
 def session() -> httpx.Client:
     client = connect(wait=0)
     if client is None:
-        sys.exit(f"penpot is not answering on {settings().url}, run `up` first")
+        sys.exit(f"penpot is not answering on {settings().endpoint}, run `up` first")
     rpc(client, "login-with-password", **profile())
     return client
 

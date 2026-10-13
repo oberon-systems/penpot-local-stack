@@ -37,17 +37,17 @@ def up() -> None:
     if template is None:
         return
     compose("up", "-d", "--wait")
-    url = settings().url
+    config = settings()
     client = connect(wait=300)
     if client is None:
-        sys.exit(f"penpot is not answering on {url}")
+        sys.exit(f"penpot is not answering on {config.endpoint}")
     publish(register(client))
     if template != prompts.EMPTY:
         load(client, drafts(client), root() / template)
-    login = f"{url}/autologin?token={client.cookies['auth-token']}"
+    login = f"{config.url}/autologin?token={client.cookies['auth-token']}"
     webbrowser.open(login)
     print(f"\nPenpot: {login}")
-    print(f"MCP:    {url}/mcp/claude")
+    print(f"MCP:    {config.endpoint}/mcp/claude")
 
 
 def down() -> None:

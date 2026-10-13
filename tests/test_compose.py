@@ -38,7 +38,7 @@ def test_the_compose_environment_follows_the_settings(tmp_path, monkeypatch):
 
     assert seen["env"]["PENPOT_PORT"] == "9100"
     assert seen["env"]["PENPOT_PROJECT"] == "mockups"
-    assert seen["env"]["PENPOT_URI"] == "http://localhost:9100"
+    assert seen["env"]["PENPOT_URI"] == "http://mockups.localhost:9100"
 
 
 def test_a_chosen_version_layers_its_tags_over_the_shipped_file(tmp_path, monkeypatch):

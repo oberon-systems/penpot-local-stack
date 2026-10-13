@@ -25,9 +25,19 @@ class Settings(BaseSettings):
     password: str = "penpot-local"  # noqa: S105
 
     @property
+    def local(self) -> bool:
+        return self.host in (*WILDCARD, "127.0.0.1")
+
+    @property
+    def endpoint(self) -> str:
+        # A wildcard bind is still reached as localhost by the tools on this machine.
+        host = "localhost" if self.local else self.host
+        return f"http://{host}:{self.port}"
+
+    @property
     def url(self) -> str:
-        # A wildcard bind is still reached as localhost by the browser opened on this machine.
-        host = "localhost" if self.host in (*WILDCARD, "127.0.0.1") else self.host
+        # Cookies ignore the port, so each local stack gets its own *.localhost name in the browser.
+        host = f"{self.project}.localhost" if self.local else self.host
         return f"http://{host}:{self.port}"
 
     @classmethod

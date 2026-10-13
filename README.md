@@ -80,6 +80,11 @@ file:
 PENPOT_PORT=9100 make up
 ```
 
+Several stacks can run side by side, each with its own `project` and `port`.
+Browsers share cookies across ports, so a local stack opens at
+`http://<project>.localhost:<port>` and its login stays apart from the
+others. Chrome and Firefox resolve `*.localhost` on their own.
+
 ## Design loop
 
 Start the stack and pick a template or `(empty)`:
@@ -92,8 +97,9 @@ make up
 through the printed `/autologin` link. If that session is lost, log in as
 `designer@example.com` with the password `penpot-local`.
 
-Draw in the browser at `http://localhost:9001`, or wherever `port` points. When you are done, pick the
-file to export and the template to write it to, then let the stack go down:
+Draw in the browser at `http://penpot-local.localhost:9001`, or wherever
+`project` and `port` point. When you are done, pick the file to export and the
+template to write it to, then let the stack go down:
 
 ```bash
 make down
@@ -159,6 +165,13 @@ claude mcp add --transport http penpot http://localhost:9001/mcp/claude
 
 After later `up` runs, reconnect `penpot` from `/mcp` instead of restarting.
 While the stack is down, the server just shows as failed.
+
+Each stack serves its own MCP behind its own `port`; the MCP container
+publishes nothing on the host. Add every extra stack under its own name:
+
+```bash
+claude mcp add --transport http penpot-beta http://localhost:9002/mcp/claude
+```
 
 The MCP plugin runs inside the Penpot browser tab. Keep a file open in the
 workspace while the agent works; a hidden or unloaded tab stops MCP.
