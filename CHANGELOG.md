@@ -1,3 +1,17 @@
+## 0.1.3 (2026-10-13)
+
+### Bug Fixes
+
+- **compose**: Postgres 18 data sits on a tmpfs it accepts
+
+### Build
+
+- **deps**: Bump the docker-compose group in /config with 4 updates
+- **deps**: Bump the pip group with 2 updates
+- **deps**: Bump wyld-cz from 0.3.1 to 0.4.1 in the pre-commit group
+- **deps**: Bump https://github.com/commitizen-tools/commitizen
+- **deps**: Bump https://github.com/astral-sh/ruff-pre-commit
+
 ## 0.1.2 (2026-10-07)
 
 ### Bug Fixes
