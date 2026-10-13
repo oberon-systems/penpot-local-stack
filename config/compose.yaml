@@ -62,8 +62,9 @@ services:
   penpot-postgres:
     image: postgres:18
     stop_signal: SIGINT
+    # Postgres 18+ keeps data in a versioned subdirectory and refuses a mount on data/.
     tmpfs:
-      - /var/lib/postgresql/data
+      - /var/lib/postgresql
     healthcheck:
       test: [CMD-SHELL, pg_isready -U penpot]
       interval: 2s
