@@ -1,3 +1,9 @@
+## 0.1.5 (2026-10-13)
+
+### Bug Fixes
+
+- **templates**: Export downloads through the CLI endpoint
+
 ## 0.1.4 (2026-10-13)
 
 ### Bug Fixes
