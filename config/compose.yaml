@@ -14,7 +14,7 @@ volumes:
 
 services:
   penpot-frontend:
-    image: penpotapp/frontend:2.18.3
+    image: penpotapp/frontend:2.18.5
     ports:
       - "${PENPOT_HOST:-127.0.0.1}:${PENPOT_PORT:-9001}:8080"
     volumes:
@@ -28,7 +28,7 @@ services:
       <<: [*flags, *uri]
 
   penpot-backend:
-    image: penpotapp/backend:2.18.3
+    image: penpotapp/backend:2.18.5
     volumes:
       - assets:/opt/data/assets
     depends_on:
@@ -47,10 +47,10 @@ services:
       PENPOT_TELEMETRY_ENABLED: "false"
 
   penpot-mcp:
-    image: penpotapp/mcp:2.18.3
+    image: penpotapp/mcp:2.18.5
 
   penpot-exporter:
-    image: penpotapp/exporter:2.18.3
+    image: penpotapp/exporter:2.18.5
     depends_on:
       penpot-valkey:
         condition: service_healthy
