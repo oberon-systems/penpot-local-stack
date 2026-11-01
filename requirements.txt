@@ -1,7 +1,7 @@
 # Installed into .venv by `make install`: the package itself, not editable
 # because hatchling refuses a dev-mode install that renames libs/, plus tooling.
 .
-commitizen==4.19.2
-pre-commit==4.6.2
+commitizen==4.19.3
+pre-commit==4.7.0
 pytest>=8
 wyld-cz==0.4.1
