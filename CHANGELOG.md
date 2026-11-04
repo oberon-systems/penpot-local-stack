@@ -1,3 +1,14 @@
+## 0.1.6 (2026-11-04)
+
+### Build
+
+- **deps**: Bump the pip group across 1 directory with 2 updates
+- **deps**: Bump https://github.com/astral-sh/ruff-pre-commit
+- **deps**: Bump https://github.com/igorshubovych/markdownlint-cli
+- **deps**: Bump https://github.com/commitizen-tools/commitizen
+- **deps**: Bump the docker-compose group in /config with 4 updates
+- **deps**: Bump the github-actions group with 2 updates
+
 ## 0.1.5 (2026-10-13)
 
 ### Bug Fixes
