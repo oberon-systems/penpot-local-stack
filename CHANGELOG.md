@@ -1,3 +1,9 @@
+## 0.1.7 (2026-11-13)
+
+### Build
+
+- **deps**: Bump the docker-compose group in /config with 4 updates
+
 ## 0.1.6 (2026-11-04)
 
 ### Build
