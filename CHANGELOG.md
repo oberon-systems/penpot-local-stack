@@ -1,3 +1,12 @@
+## 0.1.8 (2026-11-16)
+
+### Build
+
+- **deps**: Bump the docker-compose group in /config with 4 updates
+- **deps**: Bump wyld-cz from 0.4.1 to 0.5.0 in the pip group
+- **deps**: Bump https://github.com/astral-sh/ruff-pre-commit
+- **deps**: Bump wyld-cz from 0.4.1 to 0.5.0 in the pre-commit group
+
 ## 0.1.7 (2026-11-13)
 
 ### Build
