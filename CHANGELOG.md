@@ -1,3 +1,21 @@
+## 0.1.9 (2026-11-23)
+
+### Features
+
+- **cli**: Add down --force to wipe a stack without logging in
+
+### Bug Fixes
+
+- **settings**: Meet the Penpot 2.19 password policy
+- **compose**: Disable the admin console Penpot 2.19 turns on by default
+
+### Build
+
+- **deps**: Bump the docker-compose group in /config with 4 updates
+- **deps**: Bump commitizen from 4.19.3 to 4.19.4 in the pip group
+- **deps**: Bump https://github.com/astral-sh/ruff-pre-commit
+- **deps**: Bump https://github.com/commitizen-tools/commitizen
+
 ## 0.1.8 (2026-11-16)
 
 ### Build
