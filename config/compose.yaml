@@ -3,7 +3,7 @@ name: ${PENPOT_PROJECT:-penpot-local}
 x-flags: &flags
   PENPOT_FLAGS: >-
     disable-email-verification disable-secure-session-cookies disable-onboarding
-    enable-access-tokens enable-mcp
+    disable-admin-console enable-access-tokens enable-mcp
 x-uri: &uri
   PENPOT_PUBLIC_URI: ${PENPOT_URI:-http://localhost:9001}
 x-secret-key: &secret-key
