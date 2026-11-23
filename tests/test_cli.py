@@ -72,6 +72,24 @@ def test_down_drops_a_stack_that_holds_nothing(monkeypatch):
     assert calls == [("down", "-v")]
 
 
+def test_down_force_wipes_without_logging_in(monkeypatch):
+    monkeypatch.setattr(cli.sys, "argv", ["penpot-stack", "down", "--force"])
+    monkeypatch.setattr(cli, "connect", lambda wait: pytest.fail("connected anyway"))
+    calls = []
+    monkeypatch.setattr(cli, "compose", lambda *args: calls.append(args))
+
+    cli.main()
+
+    assert calls == [("down", "-v")]
+
+
+def test_main_rejects_force_on_other_commands(monkeypatch):
+    monkeypatch.setattr(cli.sys, "argv", ["penpot-stack", "up", "--force"])
+
+    with pytest.raises(SystemExit, match="usage"):
+        cli.main()
+
+
 def test_import_asks_before_touching_the_stack(tmp_path, monkeypatch):
     (tmp_path / "templates" / "alpha").mkdir(parents=True)
     (tmp_path / "templates" / "alpha" / "manifest.json").write_text("{}")

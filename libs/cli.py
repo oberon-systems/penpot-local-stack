@@ -50,8 +50,8 @@ def up() -> None:
     print(f"MCP:    {config.endpoint}/mcp/claude")
 
 
-def down() -> None:
-    client = connect(wait=0)
+def down(force: bool = False) -> None:
+    client = None if force else connect(wait=0)
     if client is not None:
         rpc(client, "login-with-password", **profile())
         stored = choices(client)
@@ -130,6 +130,10 @@ def main() -> None:
         "extract": extract,
         "convert": convert,
     }
-    if len(sys.argv) != 2 or sys.argv[1] not in commands:
-        sys.exit(f"usage: {Path(sys.argv[0]).name} {{{'|'.join(commands)}}}")
-    commands[sys.argv[1]]()
+    args = sys.argv[1:]
+    if args == ["down", "--force"]:
+        down(force=True)
+        return
+    if len(args) != 1 or args[0] not in commands:
+        sys.exit(f"usage: {Path(sys.argv[0]).name} {{{'|'.join(commands)}}} | down --force")
+    commands[args[0]]()

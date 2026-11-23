@@ -42,8 +42,8 @@ test:  ## Run the test suite
 up:  ## Start the stack, import a template and open the browser logged in
 	$(STACK) up
 
-down:  ## Offer to export, then stop the stack and wipe everything it holds
-	$(STACK) down
+down:  ## Offer to export, then stop the stack and wipe it (FORCE=1 skips the export)
+	$(STACK) down $(if $(FORCE),--force)
 
 import:  ## Import a template from templates/ into the running stack
 	$(STACK) import

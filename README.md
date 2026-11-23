@@ -110,6 +110,13 @@ make down
 `(skip export)` to throw the work away; the wipe is confirmed first whenever
 the stack still holds a file.
 
+When the stack cannot be logged in to, for example after `up` failed half
+way, wipe it without the export offer:
+
+```bash
+make down FORCE=1
+```
+
 ## Commands
 
 | Target         | What it does                                              |
