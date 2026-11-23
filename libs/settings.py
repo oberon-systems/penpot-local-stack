@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     project: str = "penpot-local"
     version: str | None = None
     email: str = "designer@example.com"
-    password: str = "penpot-local"  # noqa: S105
+    password: str = "Penpot-local-1"  # noqa: S105
 
     @property
     def local(self) -> bool:

@@ -67,7 +67,7 @@ project: penpot-local
 | `project`   | `penpot-local`         | The Compose project name        |
 | `version`   | unset                  | The Penpot image tag            |
 | `email`     | `designer@example.com` | The throwaway profile           |
-| `password`  | `penpot-local`         | Its password                    |
+| `password`  | `Penpot-local-1`       | Its password                    |
 
 Left unset, `version` runs the tags pinned in `config/compose.yaml`, which
 Dependabot keeps current; set it only to hold or try a specific release.
@@ -95,7 +95,7 @@ make up
 
 `up` creates a throwaway profile and opens the browser already logged in
 through the printed `/autologin` link. If that session is lost, log in as
-`designer@example.com` with the password `penpot-local`.
+`designer@example.com` with the password `Penpot-local-1`.
 
 Draw in the browser at `http://penpot-local.localhost:9001`, or wherever
 `project` and `port` point. When you are done, pick the file to export and the
